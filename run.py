@@ -9,9 +9,10 @@ import torch.backends.cudnn as cudnn
 from pytorch_lightning import Trainer
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.utilities.seed import seed_everything
-from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint
+from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint, ModelSummary
 from dataset import VAEDataset
 from pytorch_lightning.plugins import DDPPlugin
+import shutil
 
 
 parser = argparse.ArgumentParser(description='Generic runner for VAE models')
@@ -47,8 +48,9 @@ runner = Trainer(logger=tb_logger,
                      LearningRateMonitor(),
                      ModelCheckpoint(save_top_k=2, 
                                      dirpath =os.path.join(tb_logger.log_dir , "checkpoints"), 
-                                     monitor= "val_loss",
+                                     monitor= "Reconstruction_Loss",
                                      save_last= True),
+                     ModelSummary(max_depth=-1),
                  ],
                  strategy=DDPPlugin(find_unused_parameters=False),
                  **config['trainer_params'])
@@ -56,6 +58,9 @@ runner = Trainer(logger=tb_logger,
 
 Path(f"{tb_logger.log_dir}/Samples").mkdir(exist_ok=True, parents=True)
 Path(f"{tb_logger.log_dir}/Reconstructions").mkdir(exist_ok=True, parents=True)
+shutil.copy(args.filename, tb_logger.log_dir)
+shutil.copy('/home/zhengqi/Diffusion-based-Vide-Codec/Project/PyTorch-VAE_ref/models/vanilla_vae.py', tb_logger.log_dir)
+shutil.copy('/home/zhengqi/Diffusion-based-Vide-Codec/Project/PyTorch-VAE_ref/experiment.py', tb_logger.log_dir)
 
 
 print(f"======= Training {config['model_params']['name']} =======")
