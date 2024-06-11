@@ -93,9 +93,9 @@ class ConditionalVAE(BaseVAE):
 
         modules = []
         if hidden_dims is None:
-            # hidden_dims = [32, 64, 128, 256, 512]
+            hidden_dims = [32, 64, 128, 256, 512]
             # hidden_dims = [8, 8, 16, 32, 64]
-            hidden_dims = [16, 32, 64, 128, 256]
+            # hidden_dims = [16, 32, 64, 128, 256]
         
         self.decode_init_dim = hidden_dims[-1]
 

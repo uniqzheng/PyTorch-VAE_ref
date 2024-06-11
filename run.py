@@ -20,7 +20,7 @@ parser.add_argument('--config',  '-c',
                     dest="filename",
                     metavar='FILE',
                     help =  'path to the config file',
-                    default='configs/vae.yaml')
+                    default='configs/cvae.yaml')
 
 args = parser.parse_args()
 with open(args.filename, 'r') as file:
@@ -29,9 +29,17 @@ with open(args.filename, 'r') as file:
     except yaml.YAMLError as exc:
         print(exc)
 
+tb_log_name = config['model_params']['name'] + '_' + \
+              str(config['model_params']['latent_dim']) + '_' + \
+              str(config['data_params']['num_images']) + '_' + \
+              str(config['exp_params']['LR']) + '_' + \
+              str(config['exp_params']['scheduler_type']) + '_' + \
+              str(config['exp_params']['kld_weight']) 
+
+
 
 tb_logger =  TensorBoardLogger(save_dir=config['logging_params']['save_dir'],
-                               name=config['model_params']['name'],)
+                               name=config['model_params']['name'],version=tb_log_name)
 
 # For reproducibility
 seed_everything(config['exp_params']['manual_seed'], True)

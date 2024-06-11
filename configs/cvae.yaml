@@ -2,11 +2,11 @@ model_params:
   name: 'ConditionalVAE'
   in_channels: 3
   num_classes: 1000 # equal to num_images
-  latent_dim: 60
+  latent_dim: 122
   img_size: 512
 
 data_params:
-  data_path: '/home/zhengqi/Diffusion-based-Vide-Codec/Dataset/ffhq-dataset/ffhq_512_n1000/humanface/'
+  data_path: '/home/zhengqi/Diffusion-based-Vide-Codec/Project/Unet-diffusion-based-Video-Compression/images/ffhq_512_n5000/humanface/'
   train_batch_size: 36
   val_batch_size: 36
   patch_size: 64 # useless, since no crop 
@@ -17,8 +17,9 @@ data_params:
 
 
 exp_params:
-  LR: 0.0002
+  LR: 0.00005
   weight_decay: 0.0
+  scheduler_type: 'ExponentialLR'  # 'StepLR', 'MultiStepLR'
   scheduler_gamma: 0.95
   kld_weight: 0.00025
   manual_seed: 3047

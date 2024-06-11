@@ -1,24 +1,25 @@
 model_params:
   name: 'VanillaVAE'
   in_channels: 3
-  latent_dim: 60
+  latent_dim: 128
   img_size: 512
 
 data_params:
-  data_path: '/home/zhengqi/Diffusion-based-Vide-Codec/Dataset/ffhq-dataset/ffhq_512_n1000/humanface/'
+  data_path: '/home/zhengqi/Diffusion-based-Vide-Codec/Project/Unet-diffusion-based-Video-Compression/images/ffhq_512_n5000/humanface/'
   train_batch_size: 36
   val_batch_size:  36
   patch_size: 64 # useless, since no crop 
   num_workers: 12
   if_encoder: False
-  num_images: 1000
+  num_images: 1500
   dataset_size: 100000
-  noise_dim: 60  # the same as latent_dim. Used in top_noise
+  noise_dim: 128  # the same as latent_dim. Used in top_noise
 
 
 exp_params:
   LR: 0.0002
   weight_decay: 0.0
+  scheduler_type: 'ExponentialLR'  # 'StepLR'
   scheduler_gamma: 0.95
   kld_weight: 0.00025
   manual_seed: 3047
