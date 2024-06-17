@@ -37,7 +37,7 @@ class ImageNoiseSet(Dataset):
         torch.manual_seed(random_seed)
         if not use_encoder:
         # 获取image_path下所有的PNG文件
-            png_files = [f for f in os.listdir(image_path) if f.endswith('.png')] # in an order of 001.png, 002.png...018.png
+            png_files = [f for f in os.listdir(image_path) if f.endswith('.JPEG')] # in an order of 001.png, 002.png...018.png
         else:
             png_files = [f for f in os.listdir(image_path) if f.endswith('.enc')]
         # 按照文件名进行排序

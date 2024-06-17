@@ -22,7 +22,9 @@ class VanillaVAE(BaseVAE):
         modules = []
         if hidden_dims is None:
             # hidden_dims = [32, 64, 128, 256, 512]
-            hidden_dims = [32, 64, 128, 256, 512, 512]
+            # hidden_dims = [32, 64, 128, 256, 512, 512]
+            hidden_dims = [16, 32, 64, 128, 256]
+            # hidden_dims = [16, 32, 64]
 
         # Build Encoder
         for h_dim in hidden_dims:

@@ -29,7 +29,8 @@ with open(args.filename, 'r') as file:
     except yaml.YAMLError as exc:
         print(exc)
 
-tb_log_name = config['model_params']['name'] + '_' + \
+tb_log_name = config['data_params']['name'] + '_' + \
+              config['model_params']['name'] + '_' + \
               str(config['model_params']['latent_dim']) + '_' + \
               str(config['data_params']['num_images']) + '_' + \
               str(config['exp_params']['LR']) + '_' + \
@@ -67,7 +68,7 @@ runner = Trainer(logger=tb_logger,
 Path(f"{tb_logger.log_dir}/Samples").mkdir(exist_ok=True, parents=True)
 Path(f"{tb_logger.log_dir}/Reconstructions").mkdir(exist_ok=True, parents=True)
 shutil.copy(args.filename, tb_logger.log_dir)
-shutil.copy('/home/zhengqi/Diffusion-based-Vide-Codec/Project/PyTorch-VAE_ref/models/vanilla_vae.py', tb_logger.log_dir)
+shutil.copy('/home/zhengqi/Diffusion-based-Vide-Codec/Project/PyTorch-VAE_ref/models/cvae.py', tb_logger.log_dir)
 shutil.copy('/home/zhengqi/Diffusion-based-Vide-Codec/Project/PyTorch-VAE_ref/experiment.py', tb_logger.log_dir)
 
 

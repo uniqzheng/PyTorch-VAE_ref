@@ -1,19 +1,20 @@
 model_params:
   name: 'VanillaVAE'
   in_channels: 3
-  latent_dim: 128
-  img_size: 512
+  latent_dim: 92
+  img_size: 256
 
 data_params:
-  data_path: '/home/zhengqi/Diffusion-based-Vide-Codec/Project/Unet-diffusion-based-Video-Compression/images/ffhq_512_n5000/humanface/'
+  name: 'n02123045_s256_n1000'
+  data_path: '/home/zhengqi/Diffusion-based-Vide-Codec/Dataset/ILSVRC2012_train/n02123045_all/n02123045_s256/'
   train_batch_size: 36
   val_batch_size:  36
   patch_size: 64 # useless, since no crop 
-  num_workers: 12
+  num_workers: 6
   if_encoder: False
-  num_images: 1500
+  num_images: 1000
   dataset_size: 100000
-  noise_dim: 128  # the same as latent_dim. Used in top_noise
+  noise_dim: 92  # the same as latent_dim. Used in top_noise
 
 
 exp_params:
